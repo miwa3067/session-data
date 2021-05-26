@@ -1,0 +1,10 @@
+<body>
+  <div id="title"></div>
+</body>
+<script>
+  window.onload=function(){
+  let title=document.getElementById("title")
+  let titleValue = sessionStorage.getItem("click")
+  title.innerHTML="<h3>"+titleValue+"</h3>"
+  }
+</script>

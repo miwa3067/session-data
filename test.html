@@ -1,0 +1,48 @@
+<body>
+  <input type="text" id="name">
+  <input type="button" onclick="add()" value="add">
+  <ul id="parent"></ul>
+</body>
+<script>
+  function add() {
+    let parent = document.getElementById("parent")
+    let btnName = document.getElementById("name")
+    console.log("add")
+    let buttonLength = Number(sessionStorage.getItem("Num"))
+    if (buttonLength == undefined) {
+      buttonLength = Number(0)
+    }
+    let button = document.createElement("input")
+    button.type = "button"
+    button.value = btnName.value
+    button.id = "button" + buttonLength
+    button.onclick = function () { // onclick には関数を入れる
+      console.log("click:", button.id)
+      sessionStorage.setItem("click", button.value)
+      location.href = "./moved.html"
+    };
+    sessionStorage.setItem("Num", buttonLength + 1)
+    console.log(button)
+    sessionStorage.setItem(button.id + "value", button.value)
+    parent.appendChild(button)
+  }
+
+  window.onload = function () {
+    let parent = document.getElementById("parent")
+    let existBtn = Number(sessionStorage.getItem("Num"))
+    for (let i = 0; i < existBtn; i++) {
+      let button = document.createElement("input")
+      button.type = "button"
+      button.value = sessionStorage.getItem("button" + i+ "value")
+      button.id = "button" + i
+      button.onclick = function () { // onclick には関数を入れる
+        console.log("click:", button.id)
+        sessionStorage.setItem("click", button.value)
+        location.href = "./moved.html"
+      };
+      parent.appendChild(button)
+
+    }
+  }
+
+</script>
